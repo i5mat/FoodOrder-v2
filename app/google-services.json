@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "2671139982",
+    "project_id": "foodorder-v2-c2c78",
+    "storage_bucket": "foodorder-v2-c2c78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2671139982:android:10c063b2e690c7efc7bddf",
+        "android_client_info": {
+          "package_name": "my.edu.utem.ftmk.foodorderv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2671139982-nhuqtenb4nee0epk5dnkpqslbicri71q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEOaAy0ksWUM3amU4AadU8NSSzAA4sM4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2671139982-nhuqtenb4nee0epk5dnkpqslbicri71q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
