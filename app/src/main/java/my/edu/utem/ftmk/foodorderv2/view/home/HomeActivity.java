@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,7 +17,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import my.edu.utem.ftmk.foodorderv2.MainActivity;
 import my.edu.utem.ftmk.foodorderv2.R;
+import my.edu.utem.ftmk.foodorderv2.RegisterActivity;
 import my.edu.utem.ftmk.foodorderv2.Utils;
 import my.edu.utem.ftmk.foodorderv2.adapter.RecyclerViewHomeAdapter;
 import my.edu.utem.ftmk.foodorderv2.adapter.ViewPagerHeaderAdapter;
@@ -29,6 +33,8 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     public static final String EXTRA_CATEGORY = "category";
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_DETAIL = "detail";
+
+    private TextView welcomeTxtview;
 
     @BindView(R.id.viewPagerHeader)
     ViewPager viewPagerMeal;
@@ -46,6 +52,12 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         presenter = new HomePresenter(this);
         presenter.getMeals();
         presenter.getCategories();
+
+        welcomeTxtview = findViewById(R.id.txtWelcome);
+        SharedPreferences sharedpreferences = getSharedPreferences(RegisterActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        String name = sharedpreferences.getString("name", "NO NAME");
+
+        welcomeTxtview.setText("Welcome to FoodOrder APP " + name + "!");
     }
 
     @Override

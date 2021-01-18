@@ -3,7 +3,9 @@ package my.edu.utem.ftmk.foodorderv2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -21,7 +23,7 @@ import my.edu.utem.ftmk.foodorderv2.view.home.HomeActivity;
 
 public class MainActivity extends AppCompatActivity {
     private EditText username, password;
-    private TextView mTextView;
+    private TextView mTextView, registerTextView;
     private Button loginBtn;
 
     private FirebaseAuth mAuth;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         username = findViewById(R.id.usrname);
         password = findViewById(R.id.pssword);
         loginBtn = findViewById(R.id.login_btn);
+        registerTextView = findViewById(R.id.registerUsr);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -41,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUser();
+            }
+        });
+
+        registerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                finish();
             }
         });
     }

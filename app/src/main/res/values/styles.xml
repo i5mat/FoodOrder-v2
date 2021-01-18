@@ -6,7 +6,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/grab_official_color</item>
         <item name="colorPrimaryDark">@color/grab_official_color</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/grab_official_color</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

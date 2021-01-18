@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -22,9 +24,12 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import my.edu.utem.ftmk.foodorderv2.MainActivity;
+import my.edu.utem.ftmk.foodorderv2.OrderActivity;
 import my.edu.utem.ftmk.foodorderv2.R;
 import my.edu.utem.ftmk.foodorderv2.Utils;
 import my.edu.utem.ftmk.foodorderv2.model.Meals;
+import my.edu.utem.ftmk.foodorderv2.view.home.HomeActivity;
 
 import static my.edu.utem.ftmk.foodorderv2.view.home.HomeActivity.EXTRA_DETAIL;
 
@@ -66,6 +71,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     @BindView(R.id.source)
     TextView source;
 
+    public static final String MyPREFERENCES = "MyPrefs" ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +86,6 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
 
         DetailPresenter presenter = new DetailPresenter(this);
         presenter.getMealById(mealName);
-
     }
 
     private void setupActionBar() {
@@ -109,14 +115,14 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_detail, menu);
-        MenuItem favoriteItem = menu.findItem(R.id.favorite);
-        Drawable favoriteItemColor = favoriteItem.getIcon();
-        setupColorActionBarIcon(favoriteItemColor);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_detail, menu);
+//        MenuItem favoriteItem = menu.findItem(R.id.favorite);
+//        Drawable favoriteItemColor = favoriteItem.getIcon();
+//        setupColorActionBarIcon(favoriteItemColor);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -141,6 +147,13 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
 
     @Override
     public void setMeal(Meals.Meal meal) {
+        SharedPreferences foodPref = getApplicationContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = foodPref.edit();
+
+        editor.putString("title", meal.getStrMeal());
+        editor.putString("category", meal.getStrCategory());
+        editor.apply();
+
         Picasso.get().load(meal.getStrMealThumb()).into(mealThumb);
         collapsingToolbarLayout.setTitle(meal.getStrMeal());
         category.setText(meal.getStrCategory());
@@ -279,10 +292,15 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
             startActivity(intentYoutube);
         });
 
+//        source.setOnClickListener(v -> {
+//            Intent intentSource = new Intent(Intent.ACTION_VIEW);
+//            intentSource.setData(Uri.parse(meal.getStrSource()));
+//            startActivity(intentSource);
+//        });
+
         source.setOnClickListener(v -> {
-            Intent intentSource = new Intent(Intent.ACTION_VIEW);
-            intentSource.setData(Uri.parse(meal.getStrSource()));
-            startActivity(intentSource);
+            startActivity(new Intent(DetailActivity.this, OrderActivity.class));
+            finish();
         });
     }
 
