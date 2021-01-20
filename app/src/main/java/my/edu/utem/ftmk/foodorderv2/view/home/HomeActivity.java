@@ -1,5 +1,6 @@
 package my.edu.utem.ftmk.foodorderv2.view.home;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,7 +55,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         presenter.getCategories();
 
         welcomeTxtview = findViewById(R.id.txtWelcome);
-        SharedPreferences sharedpreferences = getSharedPreferences(RegisterActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         String name = sharedpreferences.getString("name", "NO NAME");
 
         welcomeTxtview.setText("Welcome to FoodOrder APP " + name + "!");
@@ -110,6 +111,11 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @Override
     public void onErrorLoading(String message) {
         Utils.showDialogMessage(this, "Title", message);
+    }
+
+    @Override
+    public void onBackPressed(){
+        new AlertDialog.Builder(this).setMessage("Are you sure want to logout?").setPositiveButton(android.R.string.yes, (dialog, which) -> startActivity(new Intent(HomeActivity.this, MainActivity.class))).setNegativeButton(android.R.string.no, null).show();
     }
 
 }

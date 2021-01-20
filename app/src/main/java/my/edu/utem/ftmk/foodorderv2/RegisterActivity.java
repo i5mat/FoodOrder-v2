@@ -30,8 +30,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private FirebaseAuth mAuth;
 
-    public static final String MyPREFERENCES = "MyUserPrefs" ;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +46,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         username = findViewById(R.id.usrname);
         pssword = findViewById(R.id.pssword);
         names = findViewById(R.id.name);
-
-        SharedPreferences userPref = getApplicationContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = userPref.edit();
-
-        editor.putString("name", username.getText().toString());
-        editor.apply();
     }
 
     @Override
