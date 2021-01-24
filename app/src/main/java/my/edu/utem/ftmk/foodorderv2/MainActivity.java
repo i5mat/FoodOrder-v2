@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    public static final String MyPREFERENCES = "MyUserPrefs" ;
+    public static final String MyPREFERENCES = "MyUserPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

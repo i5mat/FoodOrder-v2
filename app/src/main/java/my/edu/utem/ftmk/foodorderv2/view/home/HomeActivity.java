@@ -12,6 +12,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.Serializable;
 import java.util.List;
@@ -59,6 +63,11 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         String name = sharedpreferences.getString("name", "NO NAME");
 
         welcomeTxtview.setText("Welcome to FoodOrder APP " + name + "!");
+
+        //FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        //Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
+
+        //welcomeTxtview.setText("Welcome to FoodOrder APP " + currentFirebaseUser.getUid() + "!");
     }
 
     @Override
@@ -116,6 +125,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @Override
     public void onBackPressed(){
         new AlertDialog.Builder(this).setMessage("Are you sure want to logout?").setPositiveButton(android.R.string.yes, (dialog, which) -> startActivity(new Intent(HomeActivity.this, MainActivity.class))).setNegativeButton(android.R.string.no, null).show();
+        //FirebaseAuth.getInstance().signOut();
     }
 
 }
